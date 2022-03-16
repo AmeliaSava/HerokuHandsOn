@@ -59,7 +59,7 @@ def apply_watermark():
     r1 = s3_client.upload_file(path, bucket_name, filename, ExtraArgs={'ACL': 'public-read'})
 
     # GENERATE REQUEST FOR QRACKAJACK
-    qr_req_url = f"request('https://qrackajack.expeditedaddons.com/?api_key={os.environ['QRACKAJACK_API_KEY']}"
+    qr_req_url = f"request('https://qrackajack.expeditedaddons.com/?api_key={os.environ['QRACKAJACK_API_KEY']})"
 
     qr_name = f"qr_{filename}"
     qr_path = request_and_save(qr_req_url, qr_name)
@@ -68,7 +68,7 @@ def apply_watermark():
 
 
     # GENERATE REQUEST FOR WATERMARKER
-    watermark_req_url = f"request('https://watermarker.expeditedaddons.com/?api_key={os.environ['WATERMARKER_API_KEY']}"
+    watermark_req_url = f"request('https://watermarker.expeditedaddons.com/?api_key={os.environ['WATERMARKER_API_KEY']})"
 
     watermark_name = f"watermark_{filename}"
     request_and_save(watermark_req_url, watermark_name)
