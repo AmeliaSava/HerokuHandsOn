@@ -1,0 +1,63 @@
+<html lang="en">
+    <head>
+        <title>Watermarker CGC</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="{{ url_for('static', filename="main.css") }}">
+    </head>
+    <body>
+
+        <nav class="navbar navbar-expand-md">
+			<a class="navbar-brand" href="https://www.heroku.com/" target="_blank">Heroku</a>
+			<button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="main-navigation">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" href="https://elearning.di.unipi.it/course/view.php?id=224" target="_blank">Moodle</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="https://getbootstrap.com/" target="_blank">Bootstrap</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+        <div class="container">
+            <div class="row d-flex justify-content-center mt-3">
+				<div class="col-xs-12 col-sm-8 bg-light cont rounded pb-3" style="padding: 30px;">
+                    <div class="d-flex justify-content-center">
+                    <form action="/" method="POST" enctype="multipart/form-data">
+                        <label class="btn btn-primary">
+                            <i class="fa fa-image"></i> Upload<input type="file" style="display: none;" name="file" accept=".png, .jpg, .jpeg" required />
+                        </label>
+                        <label class="btn btn-primary">
+                            <i class="fa fa-paper-plane"></i> Invia<input type="submit" style="display: none;" name="file" accept=".png, .jpg, .jpeg" />
+                        </label>
+                    </form>
+                    </div>
+
+                    {% if filename %}
+                        <div class="d-flex justify-content-center">
+                            <form action="/watermark" method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="filename" value="{{ filename }}"/>
+                                <label class="btn btn-primary">
+                                    <i class="fa fa-qrcode"></i> Applica Watermark<input type="submit" style="display: none;" name="file" accept=".png, .jpg, .jpeg">
+                                </label>
+                            </form>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <img src="{{ url_for('static', filename=filename) }}" alt="{{ filename }}" width="80%" height="80%">
+                        </div>
+                        
+                    {% else %}
+                        <div class="d-flex justify-content-center">
+                            <img src="{{ url_for('static', filename="default.png") }}" alt="So the replacer got replaced by this text.. Good job">
+                        </div>
+                    {%  endif %}
+                </div>
+            </div>
+        </div>
+   </body>
+</html>
